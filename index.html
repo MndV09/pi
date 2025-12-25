@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para Ti — Duki | Desde el Barrio al Mundo</title>
+
+  <!-- Google Fonts (agregué Oswald para estilo urbano) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Inter:wght@300;400;600&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Favicon (opcional) -->
+  <link rel="icon" href="assets/icons/icono.png" type="image/png"> 
+</head>
+
+<body>
+  <!-- Background con efecto de graffiti/pintura -->
+  <div class="bg-graffiti" aria-hidden="true">
+    <span class="spray s1"></span>
+    <span class="spray s2"></span>
+    <span class="spray s3"></span>
+    <div class="urban-grid"></div>
+    <!-- Concert stage FX -->
+  <div class="spot s-left"></div>
+  <div class="spot s-right"></div>
+  <div class="strobe"></div>
+  <div class="fog"></div>
+  <div class="crowd"></div>
+</div>
+
+  </div>
+
+  <!-- Header con estilo street -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-diamond">◆</span>
+        <span class="brand-text">DUKI • Desde el Barrio</span>
+      </a>
+
+      <nav class="nav">
+        <a href="#momentos">Momentos</a>
+        <a href="aniversario-login.html" class="nav-lock" title="Sección privada">
+          <span class="lock-icon" aria-hidden="true">✱</span> VIP
+        </a>
+        <span class="nav-tag">#ModoDiablo</span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">FLOW DE BARRIO • REGALO URBANO</p>
+          <h1 class="title">
+            <span class="title-top">Desde el barrio</span>
+            <span class="title-main" data-glitch="Hasta tu corazón">Hasta tu corazón</span>
+
+          </h1>
+          <p class="subtitle">
+            Cada momento tiene su trap, cada recuerdo su beat.<br>
+            Un viaje en cuatro canciones, cuatro capítulos, cuatro vibes.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#momentos">
+              <span class="btn-icon">🎤</span> Escuchar los momentos
+            </a>
+            <a class="btn ghost" href="aniversario-login.html">
+              <span aria-hidden="true">✱</span> Área VIP
+            </a>
+          </div>
+
+          <div class="note">
+            <div class="note-badge">#TrapTip</div>
+            <p>
+              Si tu navegador bloquea el autoplay, solo dale play al botón "Música" abajo.
+              <span class="note-highlight">Flow garantizado.</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-top">
+            <span class="pill">#ModoDiablo</span>
+            <span class="pill subtle">Handmade</span>
+            <span class="pill accent">Trap Argento</span>
+          </div>
+
+          <div class="cover">
+            <!-- Cambia la imagen por una tuya: assets/img/portada.jpg -->
+            <img src="img/portada.png" alt="Portada estilo Duki" onerror="this.style.display='none'; this.parentElement.classList.add('cover-fallback');" />
+            <div class="cover-fallback-content">
+              <div class="cover-graffiti">DUKI</div>
+              <p class="cover-title">Portada del Flow</p>
+              <p class="cover-sub">Subí tu foto en <code>assets/img/portada.jpg</code></p>
+            </div>
+          </div>
+
+          <div class="hero-card-bottom">
+            <p class="mini">
+              ❝Donde hay trap, hay verdad. Donde hay vos, hay hogar.❞
+            </p>
+            <div class="mini-divider"></div>
+            <p class="mini small">
+              Cada capítulo tiene su canción. Cada canción, su momento.
+            </p>
+            <div class="urban-tag">• SHE DON'T GIVE A FO •</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Momentos -->
+    <section class="section" id="momentos">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">LOS CUATRO TEMAS</h2>
+          <p class="section-sub">
+            Cuatro fechas, cuatro vibes, cuatro canciones del Duko.
+          </p>
+          <div class="section-tag">#TrapLove</div>
+        </div>
+
+        <div class="cards-grid">
+          <!-- Graduación -->
+          <article class="card">
+            <div class="card-top">
+              <span class="tag">GRADUACIÓN</span>
+              <span class="date">13/12/2025</span>
+            </div>
+            <div class="card-icon">🎓</div>
+            <h3 class="card-title">"HITBOY" MOMENT</h3>
+            <p class="card-text">
+              Vos rompiéndola. Yo orgulloso. Como cuando sale un hit, pero esto es mejor.
+            </p>
+            <div class="card-track">
+              <span class="track-name">TEMA: <strong>Goteo</strong></span>
+            </div>
+            <div class="card-actions">
+              <a class="btn small primary" href="graduacion.html">
+                <span class="btn-icon">▶</span> Play
+              </a>
+              <span class="hint">#FlowDeVictoria</span>
+            </div>
+          </article>
+
+          <!-- Navidad -->
+          <article class="card">
+            <div class="card-top">
+              <span class="tag">NAVIDAD</span>
+              <span class="date">25/12/2025</span>
+            </div>
+            <div class="card-icon">🎄</div>
+            <h3 class="card-title">"SUEÑO DE VERANO" VIBE</h3>
+            <p class="card-text">
+              Regalos, abrazos y ese calor que no necesita verano.
+              Familia, vos y yo.
+            </p>
+            <div class="card-track">
+              <span class="track-name">TEMA: <strong>Salvaje</strong></span>
+            </div>
+            <div class="card-actions">
+              <a class="btn small primary" href="navidad.html">
+                <span class="btn-icon">▶</span> Play
+              </a>
+              <span class="hint">#NavidadTrap</span>
+            </div>
+          </article>
+
+          <!-- Fin de año -->
+          <article class="card">
+            <div class="card-top">
+              <span class="tag">FIN DE AÑO</span>
+              <span class="date">31/12/2025</span>
+            </div>
+            <div class="card-icon">🎆</div>
+            <h3 class="card-title">"ADVICE" MOMENT</h3>
+            <p class="card-text">
+              Cerramos un año, empezamos otro. Como un featuring nuevo: vos y yo, siempre.
+            </p>
+            <div class="card-track">
+              <span class="track-name">TEMA: <strong>Hello Cotto</strong></span>
+            </div>
+            <div class="card-actions">
+              <a class="btn small primary" href="findeano.html">
+                <span class="btn-icon">▶</span> Play
+              </a>
+              <span class="hint">#NewYearNewFlow</span>
+            </div>
+          </article>
+
+          <!-- Aniversario (privado) -->
+          <article class="card private">
+            <div class="card-top">
+              <span class="tag">VIP</span>
+              <span class="date">EXCLUSIVO</span>
+            </div>
+            <div class="card-icon">🔑</div>
+            <h3 class="card-title">"TOP SECRET" TRACK</h3>
+            <p class="card-text">
+              El tema más personal. Solo para dos. Password required.
+            </p>
+            <div class="card-track">
+              <span class="track-name">TEMA: <strong>• SECRETO •</strong></span>
+            </div>
+            <div class="card-actions">
+              <a class="btn small ghost" href="aniversario-login.html">
+                <span aria-hidden="true">✱</span> DESBLOQUEAR
+              </a>
+              <span class="hint">#ModoPrivado</span>
+            </div>
+          </article>
+        </div>
+        
+        <div class="mixtape-note">
+          <p> <strong>SETLIST:</strong> Cada tema fue elegido con vos en mente. Flow garantizado.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="footer-text">
+          <span class="footer-highlight">DESDE EL BARRIO •</span> 
+          Hecho por <strong>Mí</strong> para <strong>Vos</strong> — con trap y amor.
+        </p>
+        <div class="footer-tags">
+          <span>#Duki</span>
+          <span>#TrapArgentino</span>
+          <span>#ModoDiablo</span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Botón de música estilo equalizador -->
+   <!-- Música Home: Nueva Era -->
+<audio id="bgMusic" loop>
+  <source src="assets/audio/nuevaera.mp3" type="audio/mpeg">
+  Tu navegador no soporta audio HTML5.
+</audio>
+
+<button class="music-fab" type="button" id="musicFab" aria-label="Música (On/Off)">
+   Música
+</button>
+
+<script>
+  const audio = document.getElementById('bgMusic');
+  const btn = document.getElementById('musicFab');
+
+  let isPlaying = false;
+  let t0 = performance.now();
+
+  function tick(){
+    // Beat fake “musical” pero convincente (sin WebAudio)
+    const t = (performance.now() - t0) / 1000;
+    const beat = isPlaying ? (Math.sin(t * 6.8) * 0.5 + 0.5) : 0;   // 0..1
+    const light = isPlaying ? (Math.sin(t * 1.3) * 0.5 + 0.5) : 0.35;
+
+    document.documentElement.style.setProperty('--beat', beat.toFixed(3));
+    document.documentElement.style.setProperty('--light', light.toFixed(3));
+
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  btn.addEventListener('click', async () => {
+    try{
+      if (!isPlaying) {
+        await audio.play();
+        btn.textContent = 'ON';
+        btn.classList.add('is-on');
+      } else {
+        audio.pause();
+        btn.textContent = 'OFF';
+        btn.classList.remove('is-on');
+      }
+      isPlaying = !isPlaying;
+    } catch (e){
+      // Si el navegador bloquea autoplay hasta interacción, este click ya debería habilitarlo.
+      console.warn('No se pudo reproducir audio:', e);
+    }
+  });
+</script>
+
+
+</body>
+</html>

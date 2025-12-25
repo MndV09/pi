@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Navidad — Nuestro Momento</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS global -->
+  <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="assets/icons/icono.png" type="image/png"> 
+
+  <!-- FX navideños específicos SOLO para esta página -->
+  <style>
+    /* LUCES NAVIDEÑAS (guirnalda) */
+    .xmas-lights{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 46px;
+      z-index: 6; /* encima del header */
+      pointer-events: none;
+      opacity: .95;
+      filter: drop-shadow(0 6px 16px rgba(0,0,0,.45));
+    }
+    .xmas-lights::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 3% 60%,  rgba(255,70,90,.95) 0 6px, transparent 7px),
+        radial-gradient(circle at 9% 40%,  rgba(0,230,255,.9) 0 6px, transparent 7px),
+        radial-gradient(circle at 15% 65%, rgba(190,255,90,.9) 0 6px, transparent 7px),
+        radial-gradient(circle at 21% 45%, rgba(255,220,80,.95) 0 6px, transparent 7px),
+        radial-gradient(circle at 27% 62%, rgba(255,70,90,.95) 0 6px, transparent 7px),
+        radial-gradient(circle at 33% 42%, rgba(0,230,255,.9) 0 6px, transparent 7px),
+        radial-gradient(circle at 39% 66%, rgba(190,255,90,.9) 0 6px, transparent 7px),
+        radial-gradient(circle at 45% 44%, rgba(255,220,80,.95) 0 6px, transparent 7px),
+        radial-gradient(circle at 51% 63%, rgba(255,70,90,.95) 0 6px, transparent 7px),
+        radial-gradient(circle at 57% 43%, rgba(0,230,255,.9) 0 6px, transparent 7px),
+        radial-gradient(circle at 63% 66%, rgba(190,255,90,.9) 0 6px, transparent 7px),
+        radial-gradient(circle at 69% 44%, rgba(255,220,80,.95) 0 6px, transparent 7px),
+        radial-gradient(circle at 75% 62%, rgba(255,70,90,.95) 0 6px, transparent 7px),
+        radial-gradient(circle at 81% 42%, rgba(0,230,255,.9) 0 6px, transparent 7px),
+        radial-gradient(circle at 87% 66%, rgba(190,255,90,.9) 0 6px, transparent 7px),
+        radial-gradient(circle at 93% 44%, rgba(255,220,80,.95) 0 6px, transparent 7px),
+        radial-gradient(circle at 98% 60%, rgba(255,70,90,.95) 0 6px, transparent 7px);
+      background-repeat: no-repeat;
+      animation: twinkle 1.25s steps(2, end) infinite;
+    }
+    .xmas-lights::after{
+      content:"";
+      position:absolute;
+      left: -10px; right: -10px; top: 18px;
+      height: 2px;
+      background: rgba(255,255,255,.25);
+      opacity: .55;
+    }
+    @keyframes twinkle{
+      0%{ filter: brightness(1); opacity: .9; }
+      50%{ filter: brightness(1.35); opacity: 1; }
+      100%{ filter: brightness(1); opacity: .9; }
+    }
+
+    /* NIEVE SUAVE (2 capas) */
+    .snow{
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 4; /* debajo del header, encima de fondo */
+      opacity: .65;
+      mix-blend-mode: screen;
+    }
+    .snow::before,
+    .snow::after{
+      content:"";
+      position:absolute;
+      inset: -200px 0 0 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.85) 0 1px, transparent 2px),
+        radial-gradient(circle, rgba(255,255,255,.75) 0 1px, transparent 2px),
+        radial-gradient(circle, rgba(255,255,255,.65) 0 1px, transparent 2px);
+      background-size: 260px 260px, 340px 340px, 420px 420px;
+      background-position: 0 0, 40px 80px, 120px 160px;
+      animation: snowfall 12s linear infinite;
+      filter: blur(.2px);
+    }
+    .snow::after{
+      opacity: .55;
+      animation-duration: 18s;
+      transform: translateX(30px);
+      filter: blur(.4px);
+    }
+    @keyframes snowfall{
+      from{ transform: translateY(-120px); }
+      to  { transform: translateY(650px); }
+    }
+
+    /* Ajuste: deja aire por la guirnalda */
+    .site-header{ top: 0; }
+    body{ padding-top: 0; }
+  </style>
+</head>
+
+<body>
+  <!-- Luces navideñas -->
+  <div class="xmas-lights" aria-hidden="true"></div>
+
+  <!-- Nieve -->
+  <div class="snow" aria-hidden="true"></div>
+
+  <!-- Background blobs decorativos -->
+  <div class="bg-blobs" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+  </div>
+
+  <!-- Concert stage FX (luces/humo) -->
+  <div class="stage-fx" aria-hidden="true">
+    <div class="spot s-left"></div>
+    <div class="spot s-right"></div>
+    <div class="strobe"></div>
+    <div class="fog"></div>
+    <div class="crowd"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-dot"></span>
+        <span class="brand-text">DUKI • Regalo</span>
+      </a>
+
+      <nav class="nav">
+        <a href="index.html#momentos">Momentos</a>
+        <a href="aniversario-login.html" class="nav-lock" title="Sección privada">
+          <span class="lock-icon" aria-hidden="true"></span> Plus
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO DEL EVENTO -->
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Navidad</p>
+
+          <h1 class="title">
+            <span class="title-main" data-glitch="Contigo, todo se siente hogar">
+              Contigo, todo se siente hogar
+            </span>
+          </h1>
+
+          <p class="subtitle">
+            Esta página es un abrazo. Una noche bonita, música, y
+            un montón de cosas que me recuerdan por qué te elijo.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#recuerdos">Ver recuerdos</a>
+            <a class="btn ghost" href="#cosas">Cosas que amo de ti</a>
+          </div>
+
+          <div class="note">
+            <div class="note-badge">Otro?</div>
+            <p>
+              “Navidad? Aunque no estemos uno al lado del otro, pero siempre juntos”.
+            </p>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-top">
+            <span class="pill">Capítulo 2</span>
+            <span class="pill subtle">🎄 25/12/2025</span>
+          </div>
+
+          <div class="cover">
+            <img src="img/nav.png" alt="Foto de Navidad"
+                 onerror="this.style.display='none'; this.parentElement.classList.add('cover-fallback');" />
+            <div class="cover-fallback-content">
+              <p class="cover-title">Portada de Navidad</p>
+              <p class="cover-sub">Coloca una imagen en <code>assets/img/navidad/portada.jpg</code></p>
+            </div>
+          </div>
+
+          <div class="hero-card-bottom">
+            <p class="mini">“La magia no es la fecha… eres tú.”</p>
+            <div class="mini-divider"></div>
+            <p class="mini small">Activa la música y déjate llevar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECUERDOS -->
+    <section class="section" id="recuerdos">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Recuerdos</h2>
+          <p class="section-sub">Un pequeño recuerdo de todos los momentos que pasamos.</p>
+        </div>
+
+<!-- TIMELINE DE RECUERDOS -->
+<div class="timeline">
+
+  <div class="timeline-item left">
+    <div class="timeline-content">
+      <span class="timeline-dot"></span>
+      <h3>Navidad juntos</h3>
+      <p>Ese día entendí que contigo todo se siente hogar.</p>
+      <img src="navidad/1.jpg" alt="Navidad 1">
+    </div>
+  </div>
+
+  <div class="timeline-item right">
+    <div class="timeline-content">
+      <span class="timeline-dot"></span>
+      <h3>Saliditas random</h3>
+      <p>Sin rumbo, nunca solos; siempre acompañados.</p>
+      <img src="navidad/2.jpg" alt="Navidad 2">
+    </div>
+  </div>
+
+  <div class="timeline-item left">
+    <div class="timeline-content">
+      <span class="timeline-dot"></span>
+      <h3>Comidas con dolor de estomago?</h3>
+      <p>Siempre nuevos experimentos, antojos y recetas nuevas.</p>
+      <img src="navidad/3.jpg" alt="Navidad 3">
+    </div>
+  </div>
+
+  <div class="timeline-item right">
+    <div class="timeline-content">
+      <span class="timeline-dot"></span>
+      <h3>Cenitas</h3>
+      <p>Desapariciones como siempre, solo tu, yo y nuestra hambre ganando.</p>
+      <img src="navidad/4.jpg" alt="Navidad 4">
+    </div>
+  </div>
+
+    <div class="timeline-item left">
+    <div class="timeline-content">
+      <span class="timeline-dot"></span>
+      <h3>Despedidas?</h3>
+      <p>Aunque fue triste la partida, siempre estuvimos juntos a pesar de la distancia.</p>
+      <img src="navidad/5.jpg" alt="Navidad 5">
+    </div>
+  </div>
+
+    <div class="timeline-item right">
+    <div class="timeline-content">
+      <span class="timeline-dot"></span>
+      <h3>Nuevas Metas</h3>
+      <p>Tenias nuevas metas y propositos, que me incluyeras aunque sabias que no haria nada (tiamo).</p>
+      <img src="navidad/6.jpg" alt="Navidad 6">
+    </div>
+  </div>
+
+    <div class="timeline-item left">
+    <div class="timeline-content">
+      <span class="timeline-dot"></span>
+      <h3>Nuevas Costumbres</h3>
+      <p>El inicio de grandes momentos y trajedias.</p>
+      <img src="navidad/7.jpg" alt="Navidad 7">
+    </div>
+  </div>
+
+    <div class="timeline-item right">
+    <div class="timeline-content">
+      <span class="timeline-dot"></span>
+      <h3>Asteril</h3>
+      <p>Bonitos y gorditos</p>
+      <img src="navidad/8.jpg" alt="Navidad 8">
+    </div>
+  </div>
+
+    <div class="timeline-item left">
+    <div class="timeline-content">
+      <span class="timeline-dot"></span>
+      <h3>Tu viendolo a él</h3>
+      <p>Siempre conociendo a nuevos orizontes.</p>
+      <img src="navidad/9.jpg" alt="Navidad 9">
+    </div>
+  </div>
+
+    <div class="timeline-item right">
+    <div class="timeline-content">
+      <span class="timeline-dot"></span>
+      <h3>Yo viendote a ti</h3>
+      <p>Cada vez quitammos más metas de la lista de pendientes.</p>
+      <img src="navidad/10.jpg" alt="Navidad 10">
+    </div>
+  </div>
+
+</div>
+
+
+        <div style="height: 18px;"></div>
+
+        <div class="hero-actions">
+          <a class="btn ghost" href="index.html#momentos">← Volver al inicio</a>
+          <a class="btn primary" href="findeano.html">Siguiente: Fin de año →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- COSAS QUE AMO DE TI -->
+    <section class="section" id="cosas">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Cosas que amo de ti</h2>
+        </div>
+
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title">1) Tu forma de ser</h3>
+            <p class="card-text">Que aunque estes enojado conmigo, simpre estas a mi lado. Y que aunque te saque las canas verdes, estare contigo hasta que me dejes.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">2) Cómo me cuidas</h3>
+            <p class="card-text">Un ejemplo claro, fue mi cumpleaños, que apesar de todo el coraje que tenias, siempre estuviste cuidandome. Aunque hayan morido tus lentes.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">3) Tu risa</h3>
+            <p class="card-text">Que siempre cambia de acuerdo a lo que vayas hacer. Ya sea para maldades, romantico o simplemente por ser gracioso</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">4) Tu disciplina</h3>
+            <p class="card-text">Que apesar de que sea demasiado dificil algo, lo sacas adelante con o sin ayuda.</p>
+          </article>
+        </div>
+
+        <div style="height: 14px;"></div>
+
+        <article class="card" style="max-width: 900px;">
+          <h3 class="card-title">PA FINALIZAR</h3>
+          <p class="card-text" style="min-height:auto;">
+            “Feliz Navidad, amor. Gracias por existir en mi vida.
+            Ojalá todas las Navidades me encuentren contigo.
+            Pero deja de bromear con los tiktok que te mando, osea si, pero no.”
+          </p>
+          <div class="card-actions">
+            <span class="hint">💜 Firma: TU ESTRES FAV</span>
+            <a class="btn small ghost" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">Subir ↑</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="footer-text">Capítulo: Navidad — hecho con amor.</p>
+        <a class="footer-link" href="index.html#momentos">Volver a Momentos</a>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Música de esta sección -->
+  <audio id="bgMusic" loop>
+    <source src="assets/audio/navidad.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio HTML5.
+  </audio>
+
+  <button class="music-fab" type="button" id="musicFab" aria-label="Música (On/Off)">
+    Música
+  </button>
+
+  <script>
+    const audio = document.getElementById('bgMusic');
+    const btn = document.getElementById('musicFab');
+
+    let isPlaying = false;
+    let t0 = performance.now();
+
+    function tick(){
+      const t = (performance.now() - t0) / 1000;
+      const beat = isPlaying ? (Math.sin(t * 6.8) * 0.5 + 0.5) : 0;   // 0..1
+      const light = isPlaying ? (Math.sin(t * 1.3) * 0.5 + 0.5) : 0.35;
+
+      document.documentElement.style.setProperty('--beat', beat.toFixed(3));
+      document.documentElement.style.setProperty('--light', light.toFixed(3));
+
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    btn.addEventListener('click', async () => {
+      try{
+        if (!isPlaying) {
+          await audio.play();
+          btn.textContent = 'ON';
+          btn.classList.add('is-on');
+        } else {
+          audio.pause();
+          btn.textContent = 'OFF';
+          btn.classList.remove('is-on');
+        }
+        isPlaying = !isPlaying;
+      } catch (e){
+        console.warn('No se pudo reproducir audio:', e);
+      }
+    });
+  </script>
+</body>
+</html>

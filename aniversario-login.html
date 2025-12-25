@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aniversario — Acceso Privado</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS global -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="assets/icons/icono.png" type="image/png">
+
+  <style>
+    /* Solo estilos mínimos y compatibles con tu UI */
+    .login-wrap{
+      max-width: 920px;
+      margin: 0 auto;
+      padding-top: 24px;
+    }
+    .login-grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+    @media (max-width: 980px){
+      .login-grid{ grid-template-columns: 1fr; }
+    }
+    .field{
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: rgba(234,240,255,.92);
+      padding: 12px 12px;
+      font-size: 14px;
+      outline: none;
+    }
+    .field:focus{
+      border-color: rgba(0,212,255,.28);
+      box-shadow: 0 0 0 3px rgba(0,212,255,.08);
+    }
+    .hint{
+      opacity:.85;
+      font-size: 13px;
+      margin-top: 10px;
+    }
+    .error{
+      margin-top: 10px;
+      font-size: 13px;
+      opacity:.95;
+    }
+    .error.is-hidden{ display:none; }
+    .lock-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.25);
+      font-size: 12px;
+      opacity: .9;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Fondo/FX si ya los usas en otras páginas (no rompe si existen en tu CSS) -->
+  <div class="bg-blobs" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+  </div>
+
+  <div class="stage-fx" aria-hidden="true">
+    <div class="spot s-left"></div>
+    <div class="spot s-right"></div>
+    <div class="strobe"></div>
+    <div class="fog"></div>
+    <div class="crowd"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-dot"></span>
+        <span class="brand-text">DUKI • Regalo</span>
+      </a>
+
+      <nav class="nav">
+        <a href="index.html#momentos">Momentos</a>
+        <a href="aniversario-login.html" class="nav-lock" title="Sección privada">
+          <span class="lock-icon" aria-hidden="true"></span> Plus
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="container login-wrap">
+        <div class="section-head">
+          <p class="eyebrow">Plus</p>
+          <h1 class="title">
+            <span class="title-main" data-glitch="Acceso Privado">
+              Acceso Privado
+            </span>
+          </h1>
+          <p class="subtitle">
+            Esta parte es solo para nosotros. 💜
+          </p>
+          <span class="lock-badge">Protegido por contraseña</span>
+        </div>
+
+        <div class="login-grid">
+          <article class="card">
+            <h2 class="card-title">Escribe la contraseña</h2>
+            <p class="card-text" style="min-height:auto;">
+            </p>
+
+            <label class="hint" for="passInput">Contraseña</label>
+            <input class="field" id="passInput" type="password" placeholder="••••••••" autocomplete="off" />
+
+            <div style="height: 12px;"></div>
+
+            <div class="hero-actions">
+              <button class="btn primary" id="btnEnter" type="button">Entrar 🔓</button>
+              <a class="btn ghost" href="index.html#momentos">Volver</a>
+            </div>
+
+            <p class="error is-hidden" id="errMsg">❌ Contraseña incorrecta.</p>
+            <p class="hint">Se desbloquea solo en este dispositivo y solo en esta sesión.</p>
+          </article>
+
+          <article class="card">
+            <h2 class="card-title">Mini pista</h2>
+            <p class="card-text" style="min-height:auto;">
+              Es uno de cuantos apodos tenemos para referirnos al otro.
+            </p>
+          </article>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Si ya está desbloqueado, entra directo
+    (function(){
+      const unlocked = sessionStorage.getItem('anniv_unlocked');
+      if (unlocked === '1') {
+        window.location.href = 'aniversario.html';
+      }
+    })();
+
+    // ⚠️ Cambia AQUÍ tu contraseña
+    const PASSWORD = 'machaor';
+
+    const passInput = document.getElementById('passInput');
+    const btnEnter = document.getElementById('btnEnter');
+    const errMsg = document.getElementById('errMsg');
+
+    function tryEnter(){
+      const val = (passInput.value || '').trim();
+      const ok = val === PASSWORD;
+
+      if (ok){
+        sessionStorage.setItem('anniv_unlocked', '1');
+        window.location.href = 'aniversario.html';
+      } else {
+        errMsg.classList.remove('is-hidden');
+        passInput.value = '';
+        passInput.focus();
+      }
+    }
+
+    btnEnter.addEventListener('click', tryEnter);
+    passInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') tryEnter();
+      if (e.key === 'Escape') { passInput.value = ''; errMsg.classList.add('is-hidden'); }
+    });
+    passInput.addEventListener('input', () => errMsg.classList.add('is-hidden'));
+  </script>
+
+</body>
+</html>

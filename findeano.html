@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fin de Año — Nuestro Momento</title>
+  
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS global -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="assets/icons/icono.png" type="image/png"> 
+
+  <!-- FX fin de año SOLO para esta página -->
+  <style>
+    /* CONFETI / PARTÍCULAS (2 capas) */
+    .confetti{
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 4; /* debajo del header, encima de fondo */
+      opacity: .75;
+      mix-blend-mode: screen;
+    }
+    .confetti::before,
+    .confetti::after{
+      content:"";
+      position:absolute;
+      inset:-220px 0 0 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.85) 0 1.6px, transparent 2.6px),
+        radial-gradient(circle, rgba(0,230,255,.85) 0 1.6px, transparent 2.6px),
+        radial-gradient(circle, rgba(255,70,90,.80) 0 1.6px, transparent 2.6px),
+        radial-gradient(circle, rgba(190,255,90,.75) 0 1.6px, transparent 2.6px),
+        radial-gradient(circle, rgba(255,220,80,.82) 0 1.6px, transparent 2.6px);
+      background-size: 160px 160px, 210px 210px, 260px 260px, 320px 320px, 380px 380px;
+      background-position: 0 0, 30px 60px, 80px 140px, 120px 40px, 200px 120px;
+      animation: confettiFall 10s linear infinite;
+      filter: blur(.2px);
+    }
+    .confetti::after{
+      opacity: .55;
+      animation-duration: 16s;
+      transform: translateX(40px);
+      filter: blur(.35px);
+    }
+    @keyframes confettiFall{
+      from{ transform: translateY(-160px) rotate(0deg); }
+      to  { transform: translateY(700px) rotate(10deg); }
+    }
+
+    /* “FUEGOS” suaves arriba */
+    .fireworks{
+      position: fixed;
+      top: -30px;
+      left: -10px;
+      right: -10px;
+      height: 220px;
+      pointer-events: none;
+      z-index: 4;
+      opacity: .65;
+      filter: blur(.2px);
+      background:
+        radial-gradient(circle at 15% 60%, rgba(0,230,255,.18), transparent 45%),
+        radial-gradient(circle at 35% 25%, rgba(255,70,90,.16), transparent 42%),
+        radial-gradient(circle at 55% 55%, rgba(255,220,80,.14), transparent 45%),
+        radial-gradient(circle at 75% 28%, rgba(157,78,221,.18), transparent 45%),
+        radial-gradient(circle at 88% 58%, rgba(190,255,90,.14), transparent 45%);
+      animation: fireworksPulse 2.2s ease-in-out infinite;
+    }
+    @keyframes fireworksPulse{
+      0%,100%{ opacity: .50; }
+      50%{ opacity: .85; }
+    }
+
+    /* Cápsula del tiempo: input/textarea con estilo */
+    .field{
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: rgba(234,240,255,.92);
+      padding: 12px 12px;
+      font-size: 14px;
+      outline: none;
+    }
+    .field:focus{
+      border-color: rgba(0,212,255,.28);
+      box-shadow: 0 0 0 3px rgba(0,212,255,.08);
+    }
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 980px){
+      .grid-2{ grid-template-columns: 1fr; }
+    }
+
+    /* Accesibilidad: reducir movimiento */
+    @media (prefers-reduced-motion: reduce){
+      .confetti::before, .confetti::after, .fireworks{ animation: none !important; }
+    }
+
+    /* ===== Carrusel (solo para Fotos del año) ===== */
+   /* ===== Grid estilo Instagram ===== */
+.insta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.insta-item {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(20, 20, 30, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  aspect-ratio: 1; /* Todas las cajas cuadradas */
+}
+
+.insta-item:hover {
+  transform: translateY(-6px) scale(1.03);
+  border-color: var(--accent);
+  box-shadow: 0 20px 40px rgba(255, 0, 60, 0.25);
+  background: rgba(25, 25, 40, 0.9);
+}
+
+.insta-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.insta-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Esto cubre el área manteniendo proporción */
+  transition: transform 0.5s ease;
+}
+
+.insta-item:hover img {
+  transform: scale(1.08);
+}
+
+.insta-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #1a1a2a, #0a0a15);
+  color: var(--accent2);
+  font-size: 32px;
+}
+
+/* Para imágenes verticales: ocupar más altura, menos ancho */
+.insta-item.portrait {
+  grid-row: span 2;
+  aspect-ratio: 3/4;
+}
+
+/* Para imágenes horizontales: ocupar más ancho */
+.insta-item.landscape {
+  grid-column: span 2;
+  aspect-ratio: 16/9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .insta-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+  }
+  
+  .insta-item.portrait,
+  .insta-item.landscape {
+    grid-row: auto;
+    grid-column: auto;
+    aspect-ratio: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .insta-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 8px;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+  <!-- Confetti + fireworks -->
+  <div class="confetti" aria-hidden="true"></div>
+  <div class="fireworks" aria-hidden="true"></div>
+
+  <!-- Background blobs decorativos -->
+  <div class="bg-blobs" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+  </div>
+
+  <!-- Concert stage FX -->
+  <div class="stage-fx" aria-hidden="true">
+    <div class="spot s-left"></div>
+    <div class="spot s-right"></div>
+    <div class="strobe"></div>
+    <div class="fog"></div>
+    <div class="crowd"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-dot"></span>
+        <span class="brand-text">DUKI • Regalo</span>
+      </a>
+
+      <nav class="nav">
+        <a href="index.html#momentos">Momentos</a>
+        <a href="aniversario-login.html" class="nav-lock" title="Sección privada">
+          <span class="lock-icon" aria-hidden="true"></span> Plus
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Fin de Año</p>
+
+          <h1 class="title">
+            <span class="title-main" data-glitch="Cerramos el año... pero no la historia">
+              Cerramos el año... pero no la historia
+            </span>
+          </h1>
+
+          <p class="subtitle">
+            Este capítulo es un resumen de lo vivido, lo que aprendimos,
+            y lo que soñamos para lo que viene. Con música, como se debe.
+          </p>
+
+          <div class="countdown">
+            <p class="countdown-title">⏳ Cuenta regresiva</p>
+            <div class="countdown-grid">
+              <div><span id="cd-days">0</span><small>Días</small></div>
+              <div><span id="cd-hours">0</span><small>Horas</small></div>
+              <div><span id="cd-minutes">0</span><small>Min</small></div>
+              <div><span id="cd-seconds">0</span><small>Seg</small></div>
+            </div>
+            <p class="countdown-sub">Para despedir el 2025 juntos ✨</p>
+          </div>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#topmomentos">Top momentos</a>
+            <a class="btn ghost" href="#brindis">Brindis + deseos</a>
+          </div>
+
+          <div class="note">
+            <div class="note-badge">Idea</div>
+            <p>
+              “Este año me enseñó a que personas que ni topabas estarian a tu lado y contigo lo quiero repetir”.
+            </p>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-top">
+            <span class="pill">Capítulo 3</span>
+            <span class="pill subtle">✨ 31/12/2025-01/01/2026</span>
+          </div>
+
+          <div class="cover">
+            <img src="img/fin.png" alt="Foto de Fin de Año"
+                 onerror="this.style.display='none'; this.parentElement.classList.add('cover-fallback');" />
+            <div class="cover-fallback-content">
+              <p class="cover-title">Portada de Fin de Año</p>
+              <p class="cover-sub">Coloca una imagen en <code>assets/img/findeano/portada.jpg</code></p>
+            </div>
+          </div>
+
+          <div class="hero-card-bottom">
+            <p class="mini">“Lo mejor del año fue encontrarte (otra vez).”</p>
+            <div class="mini-divider"></div>
+            <p class="mini small">Activa música + confeti = vibe.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+<!-- GALERÍA -->
+<section class="section" id="galeria">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Fotos del año</h2>
+      <p class="section-sub">Sin descripción solo momentos tuyo y mios, y con mucha o poca gente</p>
+    </div>
+
+    <!-- Grid de fotos estilo Instagram -->
+    <div class="insta-grid" id="instaGrid">
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/2.jpg" alt="Fin de año 2" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/3.jpg" alt="Fin de año 3" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/4.jpg" alt="Fin de año 4" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/6.jpg" alt="Fin de año 6" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/7.jpg" alt="Fin de año 7" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/8.jpg" alt="Fin de año 8" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/10.jpg" alt="Fin de año 10" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/11.jpg" alt="Fin de año 11" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/12.jpg" alt="Fin de año 12" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/13.jpg" alt="Fin de año 13" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/15.jpg" alt="Fin de año 15" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/16.jpg" alt="Fin de año 16" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/17.jpg" alt="Fin de año 17" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/18.jpg" alt="Fin de año 18" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/19.jpg" alt="Fin de año 19" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/21.jpg" alt="Fin de año 21" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/22.jpg" alt="Fin de año 22" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/23.jpg" alt="Fin de año 23" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/24.jpg" alt="Fin de año 24" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/25.jpg" alt="Fin de año 25" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/27.jpg" alt="Fin de año 27" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/29.jpg" alt="Fin de año 29" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/30.jpg" alt="Fin de año 30" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/31.jpg" alt="Fin de año 31" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/32.jpg" alt="Fin de año 32" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/33.jpg" alt="Fin de año 33" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/34.jpg" alt="Fin de año 34" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/35.jpg" alt="Fin de año 35" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/36.jpg" alt="Fin de año 36" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+      
+      <div class="insta-item">
+        <div class="insta-img-wrapper">
+          <img src="findeano/37.jpg" alt="Fin de año 37" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'insta-fallback\'><span>📸</span></div>';">
+        </div>
+      </div>
+    </div>
+
+    <div style="height: 18px;"></div>
+
+    <div class="hero-actions">
+      <a class="btn ghost" href="index.html#momentos">← Volver al inicio</a>
+      <a class="btn primary" href="aniversario-login.html">Siguiente: Plus →</a>
+    </div>
+  </div>
+</section>
+
+    <!-- TOP MOMENTOS -->
+    <section class="section" id="topmomentos">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Top momentos del año</h2>
+        </div>
+
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title">1) Nuestro mejor día</h3>
+            <p class="card-text">Cuando te atoraste en la guia de la bicicleta, para todos fue un martirio, pero para ti solo fueron risa mientras que tu vida dependia de un hilo, literalmente.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">2) La risa que más amo</h3>
+            <p class="card-text">Tus maldades y tu risa malvada, que no sé que tiene que me recuerda a las crias chiquitas cuando hicieron algo muy malo.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">3) Un logro tuyo</h3>
+            <p class="card-text">El haber medio terminado un capitulo más en tu vida, con lloros, desvelos y con las de 10 monsters encima, en una semana.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">4) Un momento simple</h3>
+            <p class="card-text">El que te hayas aventado conduciendo de Molango a Pachuca tu solo, porque tu copiloto decicio ser feliz y dormirse en el trayecto.</p>
+          </article>
+        </div>
+
+        <div style="height: 14px;"></div>
+
+        <article class="card" style="max-width: 900px;">
+          <h3 class="card-title">Cierre del año</h3>
+          <p class="card-text" style="min-height:auto;">
+            “Gracias por acompañarme. Este año fue mejor porque estuviste tú.
+            El próximo… lo quiero contigo también.”
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- BRINDIS + DESEOS -->
+    <section class="section" id="brindis">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Brindis + deseos para 2026</h2>
+          <p class="section-sub">
+            Lo que deseo no es perfecto… es contigo.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <article class="card">
+            <h3 class="card-title">Un brindis por nosotros</h3>
+            <p class="card-text" style="min-height:auto;">
+              “Por todo lo que vivimos este año, por lo que aprendimos,
+              y por seguir eligiéndonos incluso cuando el mundo corre.”
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Lo mejor de este año contigo</h3>
+            <p class="card-text" style="min-height:auto;">
+              “Mi parte favorita del 2025 no fue una fecha… fue tenerte.”
+            </p>
+          </article>
+        </div>
+
+        <div style="height: 14px;"></div>
+
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title">1) Deseo #1</h3>
+            <p class="card-text">Que tengamos más tardes simples, de abrazos, risas tontas y pláticas largas, donde el mundo se detenga tantito y solo existamos tú y yo.</p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">2) Deseo #2</h3>
+            <p class="card-text">Que este año crezcamos como personas y como pareja: que cada meta tuya sea también mi orgullo, y cada reto lo enfrentemos de la mano, como un equipo.</p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">3) Deseo #3</h3>
+            <p class="card-text">Que el siguiente año nos regale viajes, primeras veces y recuerdos nuevos: lugares que aún no conocemos, fotos que todavía no tomamos y historias que vamos a contar diciendo ‘¿te acuerdas cuando? *inserta momento*</p>
+          </article>
+        </div>
+
+        <div style="height: 14px;"></div>
+
+        <article class="card" style="max-width: 900px;">
+          <h3 class="card-title">Cierre</h3>
+          <p class="card-text" style="min-height:auto;">
+            “Si el año cambia, que cambie todo… menos el elegirnos.”
+          </p>
+          <div class="card-actions">
+            <span class="hint">✨ TU ESTRES FAV</span>
+            <a class="btn small ghost" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">Subir ↑</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="footer-text">Capítulo: Fin de Año — hecho con amor.</p>
+        <a class="footer-link" href="index.html#momentos">Volver a Momentos</a>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Música de esta sección -->
+  <audio id="bgMusic" loop>
+    <source src="assets/audio/fin.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio HTML5.
+  </audio>
+
+  <button class="music-fab" type="button" id="musicFab" aria-label="Música (On/Off)">
+     Música
+  </button>
+
+<script>
+  // ===== Música =====
+  const audio = document.getElementById('bgMusic');
+  const btn = document.getElementById('musicFab');
+
+  let isPlaying = false;
+  let t0 = performance.now();
+
+  function tick(){
+    const t = (performance.now() - t0) / 1000;
+    const beat = isPlaying ? (Math.sin(t * 6.8) * 0.5 + 0.5) : 0;   // 0..1
+    const light = isPlaying ? (Math.sin(t * 1.3) * 0.5 + 0.5) : 0.35;
+
+    document.documentElement.style.setProperty('--beat', beat.toFixed(3));
+    document.documentElement.style.setProperty('--light', light.toFixed(3));
+
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  btn.addEventListener('click', async () => {
+    try{
+      if (!isPlaying) {
+        await audio.play();
+        btn.textContent = 'ON';
+        btn.classList.add('is-on');
+      } else {
+        audio.pause();
+        btn.textContent = 'OFF';
+        btn.classList.remove('is-on');
+      }
+      isPlaying = !isPlaying;
+    } catch (e){
+      console.warn('No se pudo reproducir audio:', e);
+    }
+  });
+
+  // ===== Countdown 31 de diciembre 2025 =====
+  (function countdownNYE(){
+    const endDate = new Date('2025-12-31T23:59:59').getTime();
+
+    const dEl = document.getElementById('cd-days');
+    const hEl = document.getElementById('cd-hours');
+    const mEl = document.getElementById('cd-minutes');
+    const sEl = document.getElementById('cd-seconds');
+
+    if (!dEl || !hEl || !mEl || !sEl) return;
+
+    function update(){
+      const now = Date.now();
+      const diff = endDate - now;
+
+      if (diff <= 0) {
+        dEl.textContent = hEl.textContent = mEl.textContent = sEl.textContent = '0';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      dEl.textContent = days;
+      hEl.textContent = hours;
+      mEl.textContent = minutes;
+      sEl.textContent = seconds;
+    }
+
+    update();
+    setInterval(update, 1000);
+  })();
+
+  // ===== Carrusel Fotos del Año =====
+  (function yearCarousel(){
+    const root = document.getElementById('yearCarousel');
+    if (!root) return;
+
+    const viewport = root.querySelector('.year-carousel-viewport');
+    const slides = Array.from(root.querySelectorAll('.year-carousel-slide'));
+    const btnPrev = root.querySelector('.year-carousel-btn.prev');
+    const btnNext = root.querySelector('.year-carousel-btn.next');
+    const dotsWrap = root.querySelector('.year-carousel-dots');
+
+    if (!viewport || slides.length === 0 || !dotsWrap) return;
+
+    const dots = slides.map((_, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'year-carousel-dot' + (i === 0 ? ' is-active' : '');
+      b.setAttribute('aria-label', `Ir a foto ${i + 1}`);
+      b.addEventListener('click', () => scrollToSlide(i));
+      dotsWrap.appendChild(b);
+      return b;
+    });
+
+    function getActiveIndex(){
+      const x = viewport.scrollLeft;
+      let best = 0, bestDist = Infinity;
+      slides.forEach((slide, i) => {
+        const dist = Math.abs(slide.offsetLeft - x);
+        if (dist < bestDist) { bestDist = dist; best = i; }
+      });
+      return best;
+    }
+
+    function setActive(i){
+      dots.forEach((d, idx) => d.classList.toggle('is-active', idx === i));
+    }
+
+    function scrollToSlide(i){
+      const slide = slides[i];
+      if (!slide) return;
+      viewport.scrollTo({ left: slide.offsetLeft, behavior: 'smooth' });
+      setActive(i);
+    }
+
+    btnPrev.addEventListener('click', () => {
+      const i = getActiveIndex();
+      scrollToSlide(Math.max(0, i - 1));
+    });
+
+    btnNext.addEventListener('click', () => {
+      const i = getActiveIndex();
+      scrollToSlide(Math.min(slides.length - 1, i + 1));
+    });
+
+    let raf = null;
+    viewport.addEventListener('scroll', () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = null;
+        setActive(getActiveIndex());
+      });
+    });
+
+    setActive(0);
+  })();
+// ===== Grid Instagram con detección automática de orientación =====
+(function instaGridLayout() {
+  const grid = document.getElementById('instaGrid');
+  if (!grid) return;
+  
+  const items = grid.querySelectorAll('.insta-item');
+  
+  // Detectar orientación de cada imagen y aplicar clase correspondiente
+  items.forEach((item, index) => {
+    const img = item.querySelector('img');
+    if (!img) return;
+    
+    const applyOrientationClass = () => {
+      const w = img.naturalWidth;
+      const h = img.naturalHeight;
+      if (!w || !h) return;
+      
+      // Remover clases previas
+      item.classList.remove('portrait', 'landscape');
+      
+      const ratio = w / h;
+      
+      // Si es vertical (ratio < 0.8)
+      if (ratio < 0.8) {
+        item.classList.add('portrait');
+        console.log(`Imagen ${index + 1}: Vertical (${w}x${h})`);
+      }
+      // Si es muy horizontal (ratio > 1.5)
+      else if (ratio > 1.5) {
+        item.classList.add('landscape');
+        console.log(`Imagen ${index + 1}: Horizontal (${w}x${h})`);
+      }
+      // Cuadrada o casi cuadrada - se queda sin clase adicional
+    };
+    
+    if (img.complete) {
+      applyOrientationClass();
+    } else {
+      img.addEventListener('load', applyOrientationClass, { once: true });
+    }
+  });
+  
+  // Añadir efecto de clic para ver imagen más grande
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      const img = item.querySelector('img');
+      if (!img) return;
+      
+      // Crear modal para ver imagen ampliada
+      const modal = document.createElement('div');
+      modal.className = 'insta-modal';
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        cursor: pointer;
+        backdrop-filter: blur(10px);
+      `;
+      
+      const modalImg = document.createElement('img');
+      modalImg.src = img.src;
+      modalImg.alt = img.alt;
+      modalImg.style.cssText = `
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+        border-radius: 8px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      `;
+      
+      modal.appendChild(modalImg);
+      document.body.appendChild(modal);
+      
+      // Cerrar al hacer clic
+      modal.addEventListener('click', () => {
+        document.body.removeChild(modal);
+      });
+      
+      // Cerrar con Escape
+      document.addEventListener('keydown', function closeModal(e) {
+        if (e.key === 'Escape') {
+          document.body.removeChild(modal);
+          document.removeEventListener('keydown', closeModal);
+        }
+      });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

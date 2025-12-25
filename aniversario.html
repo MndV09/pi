@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plus — Nuestro Lugar</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS global -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="assets/icons/icono.png" type="image/png">
+
+  <style>
+    /* Extra mínimo para “privado” sin romper tu estética */
+    .private-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.25);
+      font-size: 12px;
+      opacity: .9;
+    }
+    .field{
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: rgba(234,240,255,.92);
+      padding: 12px 12px;
+      font-size: 14px;
+      outline: none;
+    }
+    .field:focus{
+      border-color: rgba(0,212,255,.28);
+      box-shadow: 0 0 0 3px rgba(0,212,255,.08);
+    }
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 980px){
+      .grid-2{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="bg-blobs" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+  </div>
+
+  <div class="stage-fx" aria-hidden="true">
+    <div class="spot s-left"></div>
+    <div class="spot s-right"></div>
+    <div class="strobe"></div>
+    <div class="fog"></div>
+    <div class="crowd"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-dot"></span>
+        <span class="brand-text">DUKI • Regalo</span>
+      </a>
+
+      <nav class="nav">
+        <a href="index.html#momentos">Momentos</a>
+        <a href="aniversario-login.html" class="nav-lock" title="Sección privada">
+          <span class="lock-icon" aria-hidden="true"></span> Plus
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Plus</p>
+
+          <h1 class="title">
+            <span class="title-main" data-glitch="Nuestro lugar">
+              Nuestro lugar
+            </span>
+          </h1>
+
+          <p class="subtitle">
+            Aquí guardo lo que no quiero que se pierda: lo que siento por ti, lo que vivimos, lo que viene.
+          </p>
+
+          <span class="private-badge">🔒 Solo para nosotros</span>
+
+          <div style="height: 14px;"></div>
+
+          <div class="hero-actions">
+            <a class="btn ghost" href="#carta">Carta</a>
+            <a class="btn primary" href="#promesas">Promesas</a>
+            <button class="btn ghost" type="button" id="logoutBtn">Cerrar sesión</button>
+          </div>
+
+          <div class="note" style="margin-top: 14px;">
+            <div class="note-badge">Tip</div>
+            <p>
+              “Te elijo hoy, y te vuelvo a elegir mañana.”
+            </p>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-top">
+            <span class="pill">Capítulo 4</span>
+            <span class="pill subtle">💜</span>
+          </div>
+
+          <div class="cover">
+            <img src="img/plus.png" alt="Portada Aniversario"
+                 onerror="this.style.display='none'; this.parentElement.classList.add('cover-fallback');" />
+            <div class="cover-fallback-content">
+              <p class="cover-title">Portada Aniversario</p>
+              <p class="cover-sub">Coloca una imagen en <code>assets/img/aniversario/portada.jpg</code></p>
+            </div>
+          </div>
+
+          <div class="hero-card-bottom">
+            <p class="mini">“No es suerte. Es destino… y decisión.”</p>
+            <div class="mini-divider"></div>
+            <p class="mini small">Activa música y quédate un rato aquí.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTA -->
+    <section class="section" id="carta">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Carta</h2>
+          <p class="section-sub">Este es el lugar donde lo digo sin miedo.</p>
+        </div>
+
+        <article class="card" style="max-width: 980px;">
+          <h3 class="card-title">Para ti</h3>
+          <p class="card-text" style="min-height:auto; line-height:1.85;">
+            Lo que más admiro de ti es la forma en que enfrentas la vida: con calma, inteligencia y una fuerza que inspira. 
+            Recuerdo perfectamente el momento en que pensé “aquí es”: cuando tu manera de escuchar me hizo sentir que no tenía que fingir nada. 
+            Desde entonces supe que contigo podía ser yo misma.
+Quiero que lo que construyamos juntos sea sólido y real: un espacio donde haya proyectos compartidos y la certeza de que, pase lo que pase, nos elegiremos cada día que pase.
+            <br><br>
+            Gracias por ser mi compañero de vida, por cada risa, cada apoyo y cada momento que hemos compartido. 
+            Estoy emocionada por todo lo que nos espera en el futuro, sabiendo que, con tú a mi lado, cualquier desafío se vuelve una oportunidad para crecer juntos.
+
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROMESAS -->
+   <!-- MOMENTOS QUE NOS HICIERON -->
+<section class="section" id="momentos-nosotros">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Momentos que nos hicieron</h2>
+      <p class="section-sub">No fue uno solo. Fueron muchos pequeños.</p>
+    </div>
+
+    <div class="grid-2">
+      <article class="card">
+        <h3 class="card-title">El día que todo cambió</h3>
+        <p class="card-text">
+          Nadie penso que despues de un desayuno, todo iba a cambiar.
+          Que ninguno de los dos ibamos a ser los mismos.
+
+        </p>
+      </article>
+
+      <article class="card">
+        <h3 class="card-title">Nuestro primer “esto es real”</h3>
+        <p class="card-text">
+          Las pequeñas salidas, las charlas largas, las miradas cómplices; esas fueron las señales.
+          Eso y que nunca aceptaste un bateo de mi parte, pidiendo tareas que claramente no tenia.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3 class="card-title">Cuando me sentí en casa</h3>
+        <p class="card-text">
+          Fue en ese momento que supe que contigo podía ser yo misma, sin máscaras ni pretensiones.
+          Ese día, todo encajó perfectamente.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3 class="card-title">Un día normal que fue perfecto</h3>
+        <p class="card-text">
+          Aquel día que decidimos simplemente disfrutar el momento, sin planes ni expectativas.
+          Fue entonces cuando comprendí que la verdadera felicidad reside en las pequeñas cosas que compartimos juntos.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- LO QUE QUIERO CONTIGO -->
+<section class="section" id="futuro">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Lo que quiero contigo</h2>
+      <p class="section-sub">No es un plan perfecto, es una intención sincera.</p>
+    </div>
+
+    <article class="card" style="max-width: 980px;">
+      <h3 class="card-title">Mirando hacia adelante</h3>
+      <p class="card-text" style="min-height:auto; line-height:1.8;">
+        <br><br>
+        Imagino nuestra vida juntos como un camino compartido, lleno de proyectos que nos reten y momentos simples que nos den paz. Me emociona pensar en el futuro, en todo lo que aún no conocemos y que iremos descubriendo de la mano: viajes, aprendizajes, y también esas pequeñas rutinas que se vuelven parte de nuestra historia.
+Quiero compartir contigo cosas sencillas, como un desayuno tranquilo, una caminata sin prisa o reírnos de tonterías que solo nosotros entendemos. Y lo que no quiero perder nunca es esa complicidad que nos hace sentir únicos, la confianza de poder hablar sin filtros y la certeza de que nos elegimos cada día
+
+        <br><br>
+        <em>No sé cómo será todo, pero sí sé que quiero que seas tú.</em>
+      </p>
+    </article>
+
+    <article class="card" style="max-width: 980px; margin-top:14px;">
+      <h3 class="card-title">Si algún día dudas…</h3>
+      <p class="card-text" style="min-height:auto;">
+        De ti mismo, que sepas que lo puedes hacer todo. Que si un día sientas que la carga es demasido te puedas apoyar en mi, porque estaré a tu lado apoyandote en cada paso que estes dando.
+      
+      </p>
+    </article>
+  </div>
+</section>
+
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="footer-text">Capítulo: Plus— privado y real.</p>
+        <a class="footer-link" href="index.html#momentos">Volver a Momentos</a>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Música de esta sección -->
+  <audio id="bgMusic" loop>
+    <source src="assets/audio/ameri.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio HTML5.
+  </audio>
+
+  <button class="music-fab" type="button" id="musicFab" aria-label="Música (On/Off)">
+    Música
+  </button>
+
+  <script>
+    // ===== Protección: si no está desbloqueado, regresa al login =====
+    (function guard(){
+      const unlocked = sessionStorage.getItem('anniv_unlocked');
+      if (unlocked !== '1') {
+        window.location.href = 'aniversario-login.html';
+      }
+    })();
+
+    // ===== Música =====
+    const audio = document.getElementById('bgMusic');
+    const btn = document.getElementById('musicFab');
+
+    let isPlaying = false;
+    let t0 = performance.now();
+
+    function tick(){
+      const t = (performance.now() - t0) / 1000;
+      const beat = isPlaying ? (Math.sin(t * 6.8) * 0.5 + 0.5) : 0;   // 0..1
+      const light = isPlaying ? (Math.sin(t * 1.3) * 0.5 + 0.5) : 0.35;
+
+      document.documentElement.style.setProperty('--beat', beat.toFixed(3));
+      document.documentElement.style.setProperty('--light', light.toFixed(3));
+
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    btn.addEventListener('click', async () => {
+      try{
+        if (!isPlaying) {
+          await audio.play();
+          btn.textContent = 'ON';
+          btn.classList.add('is-on');
+        } else {
+          audio.pause();
+          btn.textContent = 'OFF';
+          btn.classList.remove('is-on');
+        }
+        isPlaying = !isPlaying;
+      } catch (e){
+        console.warn('No se pudo reproducir audio:', e);
+      }
+    });
+
+    // ===== Cerrar sesión =====
+    const logoutBtn = document.getElementById('logoutBtn');
+    logoutBtn.addEventListener('click', () => {
+      sessionStorage.removeItem('anniv_unlocked');
+      window.location.href = 'aniversario-login.html';
+    });
+  </script>
+
+</body>
+</html>
